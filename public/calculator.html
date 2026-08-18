@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .calculator {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid black;
+        width: fit-content;
+        padding: 5px 20px 20px 20px;
+        gap: 20px;
+        border-radius: 10px;
+        background-color: #252525;
+        color: #fff;
+        margin: 100px auto 0 auto;
+      }
+
+      .calculator input {
+        width: 200px;
+        height: 30px;
+        border-radius: 10px;
+        padding: 2px 2px 2px 10px;
+        border: none;
+      }
+      .calculator select {
+        width: 210px;
+        height: 33px;
+        border-radius: 10px;
+        padding: 2px 2px 2px 10px;
+        border: none;
+      }
+      .calculator button {
+        width: 210px;
+        height: 33px;
+        border-radius: 10px;
+        padding: 2px 2px 2px 10px;
+        background-color: blue;
+        color: #fff;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <h2>Calculator</h2>
+      <input
+        type="number"
+        name="num1"
+        id="num1"
+        placeholder="enter a number"
+        required
+      />
+      <input
+        type="number"
+        name="num2"
+        id="num2"
+        placeholder="enter a number"
+        required
+      />
+      <select name="operation" id="operation" required>
+        <option value="">Select an operation</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="/">/</option>
+        <option value="*">*</option>
+      </select>
+      <button id="calculate">Calculate</button>
+      <p id="resultDisplay"></p>
+    </div>
+    <script>
+      //variables
+      const num1 = document.getElementById("num1");
+      const num2 = document.getElementById("num2");
+      const operation = document.getElementById("operation");
+      const calculate = document.getElementById("calculate");
+      const resultDisplay = document.getElementById("resultDisplay");
+
+      //data fetching functionality
+      const getValue = (e) => {
+        console.log(e.target.value);
+        return e.target.value;
+      };
+
+      //calculation functionality
+      const calculateResult = () => {
+        let result;
+        const num1_data = Number(num1.value);
+        const num2_data = Number(num2.value);
+        const operation_data = operation.value;
+        switch (operation_data) {
+          case "":
+            result = "Select an operation";
+            break;
+          case "+":
+            result = num1_data + num2_data;
+            break;
+          case "-":
+            result = num1_data - num2_data;
+            break;
+          case "/":
+            if (num2_data == 0 && num1_data !== 0) {
+              result = "Can't divide by 0";
+            } else {
+              result = num1_data / num2_data;
+            }
+            break;
+          case "*":
+            result = num1_data * num2_data;
+            break;
+        }
+
+        resultDisplay.textContent = "The result &rightarrow;" + result;
+      };
+
+      const calculate_data = calculate.addEventListener(
+        "click",
+        calculateResult,
+      );
+    </script>
+    <script type="module" src="./build/calculator.js"></script>
+  </body>
+</html>
