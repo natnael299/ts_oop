@@ -35,5 +35,5 @@ const calculateResult = () => {
       break;
   }
 
-  resultDisplay.textContent = "The result &rightarrow;" + result;
+  resultDisplay.innerHTML = "The result =" + result;
 };
